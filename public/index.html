@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LanMeeting — WebRTC P2P</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>LanMeeting</h1>
+      <p class="subtitle">WebRTC 点对点会议（信令经服务器，媒体 P2P）</p>
+    </header>
+
+    <section id="join-panel" class="card">
+      <label>
+        显示名称
+        <input id="display-name" type="text" placeholder="你的名字" maxlength="32" />
+      </label>
+      <label>
+        房间 ID
+        <input id="room-id" type="text" placeholder="my-room" maxlength="64" />
+      </label>
+      <label id="token-row" class="hidden">
+        房间令牌（可选）
+        <input id="room-token" type="text" placeholder="启用 ROOM_SECRET 时必填" />
+      </label>
+      <button id="btn-join" type="button">加入会议</button>
+      <p id="status" class="status"></p>
+    </section>
+
+    <section id="meeting-panel" class="hidden">
+      <div class="toolbar">
+        <span id="room-label"></span>
+        <button id="btn-leave" type="button">离开</button>
+      </div>
+
+      <div class="video-grid" id="video-grid"></div>
+
+      <div class="chat card">
+          <h2>文字聊天</h2>
+          <p class="hint">
+            请先将对方加入同一房间；双方浏览器会自动建立 P2P 数据通道后再发送消息。
+          </p>
+          <ul id="chat-log"></ul>
+          <div class="chat-input">
+            <input id="chat-text" type="text" placeholder="输入消息…" />
+            <button id="btn-send-chat" type="button">发送</button>
+          </div>
+        </div>
+
+      <div class="file card">
+          <h2>文件传输（P2P 原型）</h2>
+          <p class="hint">文件经 DataChannel 分块发送，默认发给房间内已连接的对端。</p>
+          <input id="file-input" type="file" />
+          <progress id="file-progress" value="0" max="100"></progress>
+          <ul id="file-log"></ul>
+        </div>
+    </section>
+
+    <script type="module" src="/client.js"></script>
+  </body>
+</html>
